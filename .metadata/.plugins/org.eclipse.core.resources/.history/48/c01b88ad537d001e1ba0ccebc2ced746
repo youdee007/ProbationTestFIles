@@ -1,0 +1,54 @@
+package com.DMS;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		String dbUrl = "jdbc:postgresql://localhost:7070/Aubaid";
+        String dbUsername = "postgres";
+        String dbPassword = "rtsAdmin";
+
+         ItemManager itemManager;
+			itemManager = new ItemManager(dbUrl, dbUsername, dbPassword);
+        CategoryManager categoryManager;
+			categoryManager = new CategoryManager(dbUrl, dbUsername, dbPassword);
+        Data data = new Data(itemManager, categoryManager);
+	
+		  while (true) {
+		  
+		  System.out.println("________________________________________");
+	            System.out.println("\tITEMS STORE");
+	            System.out.println("________________________________________");
+	            System.out.println("1. Add  New Category:");
+	            System.out.println("2. List All Categories:");
+	            System.out.println("3. Add New Item:");
+	            System.out.println("4. List All Items");
+	            System.out.println("5. Exit");
+	            System.out.println("________________________________________");
+
+	            Scanner scanner = new Scanner(System.in);
+	            int menu = scanner.nextInt();
+	            System.out.println("________________________________________");
+	            switch (menu) {
+	                case 1:
+	                    Data.addCategory();
+	                    break;
+	                case 2:
+	                	Data.listCategory();
+	                    break;
+	                case 3:
+	                	Data.addItem();
+	                    break;
+	                case 4:
+	                	Data.listItem();
+	                    break;
+	                default:
+	                    System.out.println("Exiting...");
+	            }
+		  }
+		}
+	}
+
+}

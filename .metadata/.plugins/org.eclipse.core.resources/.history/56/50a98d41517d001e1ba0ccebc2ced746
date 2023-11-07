@@ -1,0 +1,60 @@
+package com.DMS;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		String dbUrl = "jdbc:postgresql://localhost:7070/Aubaid";
+        String dbUsername = "postgres";
+        String dbPassword = "rtsAdmin";
+
+        ItemManager itemManager;
+		try {
+			itemManager = new ItemManager(dbUrl, dbUsername, dbPassword);
+        CategoryManager categoryManager;
+			categoryManager = new CategoryManager(dbUrl, dbUsername, dbPassword);
+        Data data = new Data(itemManager, categoryManager);
+	}catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		  while (true) {
+		  
+		  }
+		  System.out.println("________________________________________");
+	            System.out.println("\tITEMS STORE");
+	            System.out.println("________________________________________");
+	            System.out.println("1. Add  New Category:");
+	            System.out.println("2. List All Categories:");
+	            System.out.println("3. Add New Item:");
+	            System.out.println("4. List All Items");
+	            System.out.println("5. Exit");
+	            System.out.println("________________________________________");
+
+	            Scanner scanner = new Scanner(System.in);
+	            int choice = scanner.nextInt();
+	            System.out.println("________________________________________");
+	            switch (choice) {
+	                case 1:
+	                    CategoryManager.addCategories(null);
+	                    break;
+	                case 2:
+	                	CategoryManager.getAllCategory();
+	                    break;
+	                case 3:
+	                	ItemManager.addItems(null);
+	                    break;
+	                case 4:
+	                	ItemManager.getAllItems();
+	                    break;
+	                case 5:
+	                    itemManager.close(); // Close the database connection
+	                    System.out.println("EXITING....");
+	                    System.exit(0);
+	                default:
+	                    System.out.println("Invalid Input Please try again.");
+	            }
+		}
+	}
+
+}

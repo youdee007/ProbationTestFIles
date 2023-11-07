@@ -1,0 +1,54 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Calculations {
+    public static void main(String[] args) {
+       
+        private Connection connection ;
+
+        public Calculations(String url, String username, String password) throws ClassNotFoundException {
+            try {
+            	Class.forName("org.postgresql.Driver");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:7070/Aubaid", "postgres","aubaid");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        	
+            // Query to fetch items and their categories
+        	
+            String sqlQuery = "SELECT name, category FROM items";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Initialize variables to store statistics
+            int totalItemCount = 0;
+            Map<String, Integer> categoryCounts = new HashMap<>();
+
+            // Iterate through the result set
+            while (resultSet.next()) {
+                totalItemCount++;
+                String category = resultSet.getString("category");
+                categoryCounts.put(category, categoryCounts.getOrDefault(category, 0) + 1);
+            }
+
+            // Calculate and display statistics
+            System.out.println("Total number of items: " + totalItemCount);
+            System.out.println("Category statistics:");
+
+            for (Map.Entry<String, Integer> entry : categoryCounts.entrySet()) {
+                String category = entry.getKey();
+                int itemCount = entry.getValue();
+                double percentage = (itemCount * 100.0) / totalItemCount;
+                System.out.println(category + ": " + itemCount + " items (" + percentage + "%)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+}
+}

@@ -1,0 +1,48 @@
+package com.DMS;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		String dbUrl = "jdbc:postgresql://localhost:7070/Aubaid";
+        String dbUsername = "postgres";
+        String dbPassword = "rtsAdmin";
+
+        ItemManager itemManager = new ItemManager(dbUrl, dbUsername, dbPassword);
+        CategoryManager categoryManager = new CategoryManager(dbUrl, dbUsername, dbPassword);
+        Data data = new Data(itemManager, categoryManager);
+		  while (true) {
+	            System.out.println("Employee Management System");
+	            System.out.println("1. Add Employee");
+	            System.out.println("2. List Employees");
+	            System.out.println("3. Update Employee");
+	            System.out.println("4. Delete Employee");
+	            System.out.println("5. Exit");
+
+	            Scanner scanner = new Scanner(System.in);
+	            int choice = scanner.nextInt();
+
+	            switch (choice) {
+	                case 1:
+	                    manager.addEmployee();
+	                    break;
+	                case 2:
+	                    manager.listEmployees();
+	                    break;
+	                case 3:
+	                    manager.updateEmployee();
+	                    break;
+	                case 4:
+	                    manager.deleteEmployee();
+	                    break;
+	                case 5:
+	                    employeeDAO.close(); // Close the database connection
+	                    System.out.println("Exiting the program.");
+	                    System.exit(0);
+	                default:
+	                    System.out.println("Invalid choice. Please try again.");
+	            }
+
+	}
+
+}

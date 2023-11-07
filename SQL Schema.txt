@@ -1,0 +1,11 @@
+SQLSchema:
+CREATE TABLE categories (
+    id serial PRIMARY KEY,
+    name varchar(25) NOT NULL
+);
+CREATE TABLE items (
+    id serial PRIMARY KEY,
+    name varchar(25) NOT NULL,
+    description text,
+    category_id int REFERENCES categories(id)
+);
